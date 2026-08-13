@@ -3876,45 +3876,33 @@ input:focus, select:focus, textarea:focus {
 .ana-sec > .container > .h-section {
   font-size: 44px; line-height: 1.25; max-width: 880px; margin: 0;
 }
-.ana-shots {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 28px;
-  margin: 44px 0 0; align-items: start;
+/* 第41回: LTV 廃止（2026-08-14）に伴い、2枚並び（.ana-shots）から
+   レポート1枚の全幅（.rep-shot）へ組み替えた */
+.rep-shot { margin: 44px auto 0; max-width: 940px; }
+.rep-shot .ls-tag { margin-bottom: var(--space-3); }
+.rep-shot .shot-frame {
+  display: block; border-radius: var(--radius-lg); overflow: hidden;
+  border: 1px solid var(--card-border, #E8EBF0);
+  box-shadow: 0 16px 42px rgba(19,43,69,.12);
 }
-.ana-shots figure { margin: 0; }
-.ana-shots .shot-frame {
-  display: block; height: 292px; overflow: hidden;
-  border-radius: var(--radius-lg); border: 1px solid var(--card-border, #E8EBF0);
-  box-shadow: 0 14px 40px rgba(19,43,69,.12);
-}
-.ana-shots .shot-frame img {
-  display: block; width: 100%; height: 100%;
-  object-fit: cover; object-position: top center;
-}
-.ana-shots .shot-frame::after { display: none; }
-.ana-shots .shot-more { display: inline-block; margin-top: var(--space-4); }
-.ana-note { margin-top: var(--space-5); }
+.rep-shot .shot-frame img { display: block; width: 100%; height: auto; }
+.rep-shot .shot-frame::after { display: none; }
+.rep-shot .shot-note { margin-top: var(--space-3); }
 .ana-pts { margin-top: 48px; }
 
-@media (max-width: 1023px) {
-  .ana-shots { grid-template-columns: 1fr; gap: 36px; }
-}
 @media (max-width: 767px) {
   .ana-sec { padding: 72px 0 60px; }
   .ana-sec > .container > .h-section { font-size: 31px; line-height: 1.3; }
-  .ana-shots { margin: 36px calc(var(--space-6) * -1) 0; gap: 28px; }
-  .ana-shots .ls-tag, .ana-shots .shot-more { padding: 0 var(--space-6); }
+  .rep-shot { margin: 36px calc(var(--space-6) * -1) 0; max-width: none; }
+  .rep-shot .ls-tag, .rep-shot .shot-note { padding: 0 var(--space-6); }
   /* 縮小せず、読める位置でクロップ（UI は加工していない） */
-  .ana-shots .shot-frame {
-    position: relative; border-radius: 0; border-left: none; border-right: none;
+  .rep-shot .shot-frame {
+    position: relative; height: 258px; overflow: hidden;
+    border-radius: 0; border-left: none; border-right: none;
   }
-  .ana-shots .shot-frame img {
-    position: absolute; width: auto; max-width: none; height: auto; object-fit: fill;
+  .rep-shot .shot-frame img {
+    position: absolute; left: -104px; top: -140px; width: 1040px; max-width: none; height: auto;
   }
-  .ana-shots figure:nth-child(1) .shot-frame { height: 242px; }
-  .ana-shots figure:nth-child(1) .shot-frame img { width: 1040px; left: -104px; top: -112px; }
-  .ana-shots figure:nth-child(2) .shot-frame { height: 242px; }
-  .ana-shots figure:nth-child(2) .shot-frame img { width: 950px; left: -105px; top: -148px; }
-  .ana-note { padding: 0 0; }
   .ana-pts { margin-top: 36px; }
 }
 
@@ -4709,3 +4697,14 @@ picture { display: contents; }
 }
 /* AI 章の準備中表示は本文（.ai-body 720px）と同じ幅に揃える */
 .ai-prep { max-width: 720px; margin-top: var(--space-6); }
+
+/* 第41回: トップ F の項目が LTV 廃止で 4→3 になった。
+   2カラムのままだと右下が1マス空くので3カラムへ。 */
+@media (min-width: 1024px) {
+  .biz-points { grid-template-columns: repeat(3, 1fr); gap: 40px 40px; }
+}
+
+/* 第41回: §6 の項目も LTV 廃止で 4→3。右下を空けないため3カラムへ。 */
+@media (min-width: 861px) {
+  .ana-pts { grid-template-columns: repeat(3, 1fr); gap: 28px 40px; }
+}
