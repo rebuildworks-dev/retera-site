@@ -4704,3 +4704,98 @@ picture { display: contents; }
   .biz-points { grid-template-columns: repeat(3, 1fr); gap: 40px 40px; }
 }
 
+
+/* ============================================================
+   第39回（2026-08-17）— 図版の線の実測点検で見つかった不整合の修正
+   ① .split-cards が ul 既定の padding-inline-start:40px を持ったままで、
+      カード列が全幅で 20px 右にずれていた（集約線とカード中心が最大 32px ズレ）
+   ② 768〜1023px では 3列×2段のカードに PC 用の 6 本線が出ていた
+   ============================================================ */
+.split-cards { padding: 0; }
+
+/* PC: viewBox を上へ 8px 伸ばした分を負マージンで戻す（下端は従来どおり） */
+@media (min-width: 1024px) {
+  .converge-pc { height: 140px; margin-top: -8px; }
+}
+
+/* 1023px 以下は 3列×2段なので、常に 3 本版（converge-sp）を使う */
+@media (max-width: 1023px) {
+  .converge-pc { display: none; }
+  .converge-sp { display: block; max-width: 340px; }
+}
+
+/* FV のノードは中心が線（viewBox y=96）から 0.95px 下にいた。中心を線上へ。 */
+@media (min-width: 1024px) {
+  .hero-nodes li::before { top: -5px; }
+}
+
+/* 集約点のノード（SVG の非等比スケールに影響されないよう CSS で置く） */
+.converge-wrap { position: relative; }
+.cv-node {
+  position: absolute; left: 50%; width: 9px; height: 9px;
+  margin: 0 0 -4.5px -4.5px; border-radius: 50%;
+  background: var(--surface); border: 1.8px solid var(--primary);
+}
+@media (min-width: 1024px) { .cv-node { bottom: 25.71%; } }  /* viewBox y=96 / -8..132 */
+@media (max-width: 1023px) { .cv-node { bottom: 30.77%; } }  /* viewBox y=72 / 0..104 */
+
+/* ============================================================
+   第39回 — 一本線モチーフ: 線とノードの高さを揃える
+   ol 側の上パディング 22px が「線（ol 上端）」と「ノード（li 上端基準）」の
+   間に挟まっていたため、横線がノード列の 24px 上を通っていた。
+   ol のパディングを外し、線・ノードとも中心を li の上端に合わせる。
+   ============================================================ */
+@media (min-width: 768px) {
+  .solveline, .rs-line, .featline { padding-top: 0; }
+  .solveline::before, .rs-line::before, .featline::before { margin-top: -0.65px; }
+}
+.pt-line, .chainline { padding-top: 0; }
+.pt-line::before, .chainline::before { margin-top: -0.65px; }
+.nf-line::before { margin-top: -0.65px; }
+
+.solveline li::before, .pt-line li::before, .rs-line li::before,
+.featline li::before, .chainline li::before, .nf-line li::before { top: -7px; }
+
+/* モバイル FV: 背面の連続線（各行 3.6〜5.1px）に対してノードが 1.65px 下にいた */
+@media (max-width: 1023px) {
+  .heroline li::after,
+  .heroline li:first-child::after,
+  .heroline li:last-child::after { top: -0.65px; }
+}
+
+/* features のモバイル: 3列×2段の一本線が段で切れて 2 本に見えていたので、
+   solveline / rs-line と同じ折返し（2段目を右→左、右端を縦線でつなぐ）にする */
+@media (max-width: 767px) {
+  .featline { position: relative; }
+  .featline li:nth-child(4) { grid-column: 3; grid-row: 2; }
+  .featline li:nth-child(5) { grid-column: 2; grid-row: 2; }
+  .featline li:nth-child(6) { grid-column: 1; grid-row: 2; }
+  .featline li:nth-child(4)::after,
+  .featline li:nth-child(5)::after { left: auto; right: 50%; width: 100%; }
+  .featline li:nth-child(6)::after { content: none; }
+  .featline::before {
+    content: ""; position: absolute; left: 83.333%; right: auto;
+    margin-left: -0.65px; top: 18px;
+    width: 1.3px; height: 58.8px;
+    background: var(--primary); opacity: .65;
+  }
+}
+
+/* AI / 人 の境界: ノードの中心が境界線から 1.8px ずれていた */
+.ai-split::after { margin: -6.3px 0 0 -6.3px; }
+
+/* モバイル FV: 背面の線が左右とも列の外（両端ノードの 12.5% 外側）まで伸びて
+   左端が宙で切れていた。線を両端ノードの間だけに収め、折返しの弧も右端ノードに合わせる */
+@media (max-width: 1023px) {
+  .heroline { background-size: 75% 40px; background-position: center top; }
+  .heroline::after { right: calc(12.5% - 15px); }
+}
+
+/* AI/人 の境界ノード: 実寸の半径は 5.5px。線の中心に合わせる */
+.ai-split::after { margin: -5.5px 0 0 -5.5px; }
+@media (max-width: 767px) { .ai-split::after { margin-top: -4.85px; } }
+
+/* モバイルの fit3: 縦線がノード中心より 2px 左を通り、最後のノードの下に 5.5px はみ出していた */
+@media (max-width: 767px) {
+  .fit3::before { left: 6.35px; bottom: 27.5px; }
+}
