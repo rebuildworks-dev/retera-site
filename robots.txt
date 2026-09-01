@@ -1,16 +1,4 @@
 # Retera 製品サイト
-#
-# ⚠️ 公開前の状態です。
-#    各 HTML に <meta name="robots" content="noindex, nofollow"> が入っており、
-#    .htaccess でも X-Robots-Tag を返しています。
-#    ここで Disallow にしてしまうと、クローラが noindex を読みに来られなくなり
-#    かえってインデックスから消えにくくなるため、クロール自体は許可しています。
-#
-#    公開するときは、
-#      1) 各 HTML の <meta name="robots"> を削除
-#      2) .htaccess の X-Robots-Tag を削除
-#      3) 下の Sitemap 行のコメントを外す（tools/apply_domain.py が自動で行います）
-#    の 3 つをまとめて行ってください。
 
 User-agent: *
 Allow: /
@@ -22,4 +10,4 @@ Allow: /
 # 生成元の HTML（スクリーンショット用のダミー画面）は検索結果に出す意味がない
 Disallow: /mockups/
 
-# Sitemap: https://（ドメイン確定後にここへ）/sitemap.xml
+Sitemap: https://rebuildworks.co.jp/sitemap.xml

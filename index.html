@@ -6,22 +6,22 @@
 <title>リフォーム会社の業務システム Retera（リテラ）</title>
 <meta name="description" content="Retera（リテラ）は、リフォーム会社の業務を引合から入金まで1つで回す業務システムです。引合・顧客、見積、契約、工程、発注、請求、入金、分析を同じデータの上でつなぎ、転記をなくします。提供は株式会社リビルドワークス。">
 
-<meta name="robots" content="noindex, nofollow">
-
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Retera（リテラ）">
 <meta property="og:locale" content="ja_JP">
 <meta property="og:title" content="リフォーム会社の業務システム Retera（リテラ）">
 <meta property="og:description" content="リフォーム会社の業務を、引合から入金まで1つで回す業務システム。顧客も、工事も、発注も、請求も、Retera（リテラ）1つで回します。">
-<meta property="og:image" content="img/ogp.png">
+<meta property="og:url" content="https://rebuildworks.co.jp/retera/">
+<meta property="og:image" content="https://rebuildworks.co.jp/retera/img/ogp.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="バラバラのシステムを、1つに。Retera（リテラ）">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="リフォーム会社の業務システム Retera（リテラ）">
 <meta name="twitter:description" content="リフォーム会社の業務を、引合から入金まで1つで回す業務システム。顧客も、工事も、発注も、請求も、Retera（リテラ）1つで回します。">
-<meta name="twitter:image" content="img/ogp.png">
+<meta name="twitter:image" content="https://rebuildworks.co.jp/retera/img/ogp.png">
 
+<link rel="canonical" href="https://rebuildworks.co.jp/retera/">
 <meta name="theme-color" content="#132B45">
 <link rel="icon" href="img/retera-mark-512.png">
 <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
@@ -33,31 +33,17 @@
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "Organization",
-      "name": "株式会社リビルドワークス",
-      "alternateName": "REBUILD WORKS",
-      "foundingDate": "2023",
-      "email": "office@rebuildworks.co.jp",
-      "telephone": "+81-6-6964-8777",
-      "faxNumber": "+81-6-6964-8778",
-      "address": {
-        "@type": "PostalAddress",
-        "postalCode": "550-0015",
-        "addressCountry": "JP",
-        "addressRegion": "大阪府",
-        "addressLocality": "大阪市西区",
-        "streetAddress": "南堀江3-2-1"
-      },
-      "logo": "img/retera-logo.png"
+      "@id": "https://rebuildworks.co.jp/#organization"
     },
     {
       "@type": "WebSite",
-      "name": "Retera（リテラ）",
+      "name": "株式会社リビルドワークス",
       "inLanguage": "ja",
       "publisher": {
-        "@type": "Organization",
-        "name": "株式会社リビルドワークス"
-      }
+        "@id": "https://rebuildworks.co.jp/#organization"
+      },
+      "@id": "https://rebuildworks.co.jp/#website",
+      "url": "https://rebuildworks.co.jp/"
     },
     {
       "@type": "SoftwareApplication",
@@ -80,9 +66,9 @@
         "監査ログ"
       ],
       "publisher": {
-        "@type": "Organization",
-        "name": "株式会社リビルドワークス"
-      }
+        "@id": "https://rebuildworks.co.jp/#organization"
+      },
+      "url": "https://rebuildworks.co.jp/retera/"
     }
   ]
 }
@@ -107,7 +93,7 @@
     <nav class="site-nav">
       <a href="index.html" class="current">製品</a>
       <a href="features.html">機能</a>
-      <a href="company.html">会社概要</a>
+      <a href="/company.html">会社概要</a>
       <a href="contact.html" class="btn btn-primary btn-sm">相談する</a>
     </nav>
   </div>
@@ -160,6 +146,12 @@
   </div>
 
 </section>
+
+<div class="container release-wrap">
+    <p class="release-note">
+      Retera は <b>2027 年 提供開始予定</b>です。導入のご相談は、先行して承っています。
+    </p>
+</div>
 
 <section class="section issue">
   <div class="container">
@@ -583,7 +575,10 @@
       <li><span class="no">05</span><h3>権限</h3>
         <p>22のロールと29の権限で、タブの表示可否から個別機能まで制御。パスワードは12文字以上・文字種3種以上で、よく使われるパスワードは拒否します。</p></li>
       <li><span class="no">06</span><h3>置き場所</h3>
-        <p>AWS の東京リージョンで運用します。通信は TLS 1.2 / 1.3 で暗号化します。</p></li>
+  <p>北海道・石狩のデータセンターで運用しています。周辺に活断層はなく、
+  想定される津波の到達点よりも高い地盤に建てられています。
+  2018年の北海道胆振東部地震で道内全域が停電した際も、このデータセンターは
+  稼働を止めませんでした。通信は TLS 1.2 / 1.3 で暗号化します。</p></li>
     </ul>
   </div>
 </section>
@@ -685,6 +680,43 @@
   </div>
 </section>
 
+<section class="section origin">
+  <div class="container">
+    <p class="origin-eyebrow">THE NAME</p>
+    <h2 class="h-section">Retera という名前について。</h2>
+
+    <div class="origin-type" role="img"
+         aria-label="Retera は、Reform の Re と literacy の tera を合わせた造語です。">
+      <span class="frag" aria-hidden="true">
+        <span class="glyph g-re">Re</span>
+        <span class="stem"></span>
+        <span class="src">Reform</span>
+      </span>
+      <span class="frag" aria-hidden="true">
+        <span class="glyph g-tera">tera</span>
+        <span class="stem"></span>
+        <span class="src">literacy</span>
+      </span>
+    </div>
+
+    <div class="origin-body">
+      <p class="lead">
+        リフォームの <b>Re</b> と、リテラシーの <b>tera</b>。<span class="nbr"><br></span>2つをつないだ造語です。
+      </p>
+      <p>
+        リテラシーとは、その分野のことを理解して、使いこなせる状態を指します。
+        リフォームの仕事では、たくさんの数字が動きます。どの現場がいくらで終わったのか。
+        誰が、いつ、何を決めたのか。<span class="emph">それを扱える会社と、扱えないまま進む会社があります。</span>
+      </p>
+      <p>
+        違いは、能力ではなく道具にあると考えました。
+        特別な知識がなくても、自分の会社の数字が扱える。一度入れた情報が、そのまま次に使える。
+        そういう道具をつくるための名前です。
+      </p>
+    </div>
+  </div>
+</section>
+
 <section class="section fit-sec">
   <div class="container">
     <h2 class="h-section">こんな会社に向いています。</h2>
@@ -740,14 +772,14 @@
           <ul>
             <li><a href="index.html">製品</a></li>
             <li><a href="features.html">機能</a></li>
-            <li><a href="company.html">会社概要</a></li>
+            <li><a href="/company.html">会社概要</a></li>
           </ul>
         </div>
         <div class="footer-col">
           <h2>CONTACT</h2>
           <ul>
             <li><a href="contact.html">お問い合わせ</a></li>
-            <li><a href="privacy.html">個人情報の取り扱いについて</a></li>
+            <li><a href="/privacy.html">個人情報の取り扱いについて</a></li>
           </ul>
         </div>
       </div>

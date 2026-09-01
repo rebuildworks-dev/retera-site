@@ -4893,3 +4893,120 @@ picture { display: contents; }
   .faq dd { font-size: 15px; line-height: 1.85; }
   .faq-foot { margin-top: var(--space-6); font-size: 13px; }
 }
+
+/* 迷惑メール対策のおとり項目。読み上げにも出さず、画面にも出さない
+   （display:none だと埋めないボットがいるので、画面外へ逃がす） */
+.hp {
+  position: absolute !important;
+  left: -9999px !important; top: auto !important;
+  width: 1px !important; height: 1px !important;
+  overflow: hidden !important;
+}
+
+/* 送信に失敗したときの箱。.callout の色だけ差し替える */
+.callout-warn {
+  border-left-color: var(--danger);
+  background: #FBF0EF;
+}
+
+/* ============================================================
+   第42回（2026-08-20）— 機能ページ 6「経営の道具」を濃紺に
+   白と灰が 9 回交互に続いて単調だったため、中盤で 1 つ切り替える。
+   トップの同じ主題（入力した数字が、そのまま経営の道具になります）も濃紺なので色が揃う。
+   濃紺の上では読めなくなる文字だけを個別に上げる。
+   ============================================================ */
+.section-navy .fstage b { color: var(--primary); }
+.section-navy .fstage span { color: rgba(255, 255, 255, 0.88); }
+.section-navy .fstage span::before { color: rgba(255, 255, 255, 0.42); }
+.section-navy .ls-tag { color: rgba(255, 255, 255, 0.66); }
+.section-navy .lead-pts li::before { border-color: var(--primary); }
+/* .lead-pts h3 / p は style.css の後方で色を持っているため、詳細度で上書きする */
+.section-navy .lead-pts h3 { color: #fff; }
+.section-navy .lead-pts p { color: rgba(255, 255, 255, 0.82); }
+
+/* 提供時期の明示（2026-08-20）。まだ出していない製品なので、最初に見える場所で断る。
+   FV の実画面が絶対配置で下にはみ出しているので、その上に出す（z-index を付けないと文字が隠れる） */
+.release-wrap { position: relative; z-index: 6; margin-top: 8px; margin-bottom: 44px; }
+.release-note {
+  max-width: 760px; margin: 0 auto;
+  padding: var(--space-4) var(--space-5);
+  border-left: 3px solid var(--primary);
+  background: var(--primary-faint);
+  color: var(--text);
+  font-size: var(--fs-md); line-height: var(--lh-base);
+}
+.release-note b { color: var(--primary-text); font-weight: 700; }
+.contact-form-sec .release-note { max-width: 720px; margin-bottom: var(--space-7); }
+@media (max-width: 767px) {
+  .release-wrap { margin-top: 24px; margin-bottom: 32px; }   /* 負にすると実画面に重なる */
+  .release-note { font-size: 14px; padding: var(--space-4); }
+}
+
+/* ヘッダーのボタン。`.site-nav a`（詳細度 0,1,1）が `.btn-primary`（0,1,0）に勝ってしまい、
+   オレンジの上に灰色の文字が乗っていた（2026-08-20 大西様の指摘で判明） */
+.site-nav a.btn-primary,
+.site-nav a.btn-primary:hover,
+.site-nav a.btn-primary:focus { color: #fff; }
+
+/* ============================================================
+   K0b — 名前の由来「Retera という名前について。」（2026-08-21）
+   K0（白）と K（#F7F9FC）の間に置くので、背景はクリームで区切る。
+   Re / tera を大きく出し、そこから細い縦線を下ろして語源をぶら下げる。
+   縦線はサイト全体の「一本の線」と同じ引き方（1.3px / primary / 低い不透明度）。
+   ============================================================ */
+.origin {
+  background: var(--primary-faint);
+  padding: 128px 0 116px;
+}
+.origin > .container { max-width: 1120px; }
+
+.origin-eyebrow {
+  margin: 0 0 14px;
+  font-size: 11px; font-weight: 700; letter-spacing: .16em;
+  color: var(--primary-text); text-transform: uppercase;
+}
+.origin > .container > .h-section { margin-bottom: 56px; }
+
+/* --- Re + tera --- */
+.origin-type {
+  display: flex; align-items: flex-start; justify-content: flex-start;
+  margin: 0 0 56px; padding-left: 2px;
+}
+.origin-type .frag {
+  display: flex; flex-direction: column; align-items: center;
+}
+.origin-type .glyph {
+  font-size: 88px; font-weight: 700; line-height: 1;
+  letter-spacing: -0.02em;
+}
+/* 白背景の #F47A20 は 2.7:1 で AA 未達。文字には #A45E00 を使う（節20.9） */
+.origin-type .g-re   { color: var(--primary-text); }
+.origin-type .g-tera { color: var(--navy); }
+
+.origin-type .stem {
+  width: 1.3px; height: 30px; margin-top: 16px;
+  background: var(--primary); opacity: .65;   /* .creed-rule と同じ濃さに揃える */
+}
+.origin-type .src {
+  margin-top: 10px;
+  font-size: 12px; font-weight: 600; letter-spacing: .06em;
+  color: var(--text-muted);
+}
+
+/* --- 本文（creed と同じ組み） --- */
+.origin-body { max-width: 620px; }
+.origin-body p { margin: 0 0 22px; font-size: 16px; line-height: 1.9; color: var(--text-muted); }
+.origin-body p:last-child { margin-bottom: 0; }
+.origin-body .lead { color: var(--navy); font-weight: 600; }
+.origin-body .lead b { color: var(--primary-text); font-weight: 700; }
+.origin-body .emph { color: var(--primary-text); }
+
+@media (max-width: 767px) {
+  .origin { padding: 88px 0 80px; }
+  .origin > .container > .h-section { margin-bottom: 40px; }
+  .origin-type { margin-bottom: 40px; }
+  .origin-type .glyph { font-size: 52px; }
+  .origin-type .stem { height: 22px; margin-top: 12px; }
+  .origin-type .src { font-size: 11px; margin-top: 8px; }
+  .origin-body p { font-size: 15px; line-height: 1.85; margin-bottom: 20px; }
+}

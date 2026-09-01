@@ -1,25 +1,40 @@
-# Retera 製品サイト — Apache 用の最小設定（2026-08-10）
+# Retera 製品サイト — Apache 用の最小設定（2026-08-10 / 2026-08-17 更新）
 #
 # ⚠️ このファイルは Apache のときだけ効きます。
 #    レンタルサーバ（さくら・エックスサーバー・ロリポップ等）はほぼ Apache なので、
 #    site/ の中身と一緒にアップロードすれば 404 ページが有効になります。
 #    nginx や GitHub Pages の場合は別の設定が必要です（GitHub Pages は 404.html を自動で使います）。
 
-# --- 404 ページ ---
-ErrorDocument 404 /404.html
+# --- 親ディレクトリの書き換えを継承しない（2026-08-17 追加。これが無いと 404 が 500 になる）---
+#     公開先の /public_html に、以前 WordPress を動かしていた頃の .htaccess が残っていて、
+#     「存在しないURLは /index.php へ」という書き換えがこのサイトまで効いてしまう。
+#     その index.php は現在パーミッション 000 で実行できないため、
+#     404 を出そうとした瞬間に 500 Internal Server Error になっていた。
+#     このサイトは静的ファイルだけで書き換えを一切使わないので、明示的に切る。
+<IfModule mod_rewrite.c>
+  RewriteEngine Off
+</IfModule>
+
+# --- 404 ページ（本体サイトの /retera/ 配下に置くので絶対パスで指す）---
+ErrorDocument 404 /retera/404.html
 
 # --- 文字コード ---
 AddDefaultCharset UTF-8
 
-# --- 公開までの間、検索避けを HTTP ヘッダーでも念のため付ける ---
-# ⚠️ 公開時には、この 3 行と各 HTML の <meta name="robots"> を一緒に外すこと。
-<IfModule mod_headers.c>
-  Header set X-Robots-Tag "noindex, nofollow"
-</IfModule>
-
-# --- 画像・CSS のキャッシュ（更新時はファイル名を変えるか、この行を外す）---
+# --- キャッシュ ---
+#     画像は中身が変わらないので長め。
+#     CSS を 1 日にしていたら、直したのに 1 日反映されない状態になった（2026-08-17）。
+#     更新が続くうちは短くしておく。落ち着いたら伸ばしてよい。
 <IfModule mod_expires.c>
   ExpiresActive On
-  ExpiresByType image/png "access plus 7 days"
-  ExpiresByType text/css  "access plus 1 days"
+  ExpiresByType image/png  "access plus 7 days"
+  ExpiresByType image/webp "access plus 7 days"
+  ExpiresByType text/css   "access plus 10 minutes"
+</IfModule>
+
+# --- HTML は毎回サーバーに確認させる（変わっていなければ 304 が返るので軽い）---
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html|xml|txt)$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
 </IfModule>
