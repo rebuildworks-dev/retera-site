@@ -38,3 +38,7 @@ AddDefaultCharset UTF-8
     Header set Cache-Control "no-cache, must-revalidate"
   </FilesMatch>
 </IfModule>
+
+# --- 末尾に / を付けた .html のアドレスは、/ なしへ転送する (2026-10-07 大西様。
+#     「…/sunreform-guide.html/」で 404 になり、案内のリンクが切れていたため) ---
+RedirectMatch 301 ^/retera/(.+\.html)/$ /retera/$1
